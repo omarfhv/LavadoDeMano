@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,8 +14,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.Locale;
 
@@ -23,7 +31,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class CancionTusa extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 40000;
 
-    MediaPlayer mp;
+    MediaPlayer[] mp = new MediaPlayer[10];
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
@@ -32,10 +40,24 @@ public class CancionTusa extends AppCompatActivity {
     private boolean mTimerRunning;
     private GifImageView gifImageView;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    int numpista = 0;
+    private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mp[0] = MediaPlayer.create(this, R.raw.tus);
+        mp[1] = MediaPlayer.create(this, R.raw.violetas);
+        mp[2] = MediaPlayer.create(this, R.raw.chona);
+        mp[3] = MediaPlayer.create(this, R.raw.jefes);
+        mp[4] = MediaPlayer.create(this, R.raw.noa);
+        mp[5] = MediaPlayer.create(this, R.raw.marchar);
+        mp[6] = MediaPlayer.create(this, R.raw.queen);
+        mp[7] = MediaPlayer.create(this, R.raw.carcacha);
+        mp[8] = MediaPlayer.create(this, R.raw.du);
+
 
         //botonatras
         if (getSupportActionBar() != null) {
@@ -45,23 +67,39 @@ public class CancionTusa extends AppCompatActivity {
         }
         setContentView(R.layout.activity_cancion_selena);
 
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("save",0);
+        SharedPreferences.Editor editor = prefs.edit();
+        numpista = prefs.getInt("pista", 0);
+
+
         mTextViewCountDown = findViewById(R.id.text_view_countdown);
 
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
         gifImageView = findViewById(R.id.Secuencias);
 
-        mp = MediaPlayer.create(this, R.raw.tus);
 
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if (mTimerRunning) {
                     pauseTimer();
-                    mp.pause();
+                    mp[numpista].pause();
 
                 } else {
-                    mp.start();
+                    mp[numpista].start();
                     startTimer();
 
                     Toast.makeText(getApplicationContext(),"inicio", Toast.LENGTH_SHORT).show();
@@ -75,8 +113,8 @@ public class CancionTusa extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resetTimer();
-                mp.stop();
-                mp.prepareAsync();
+                mp[numpista].stop();
+                mp[numpista].prepareAsync();
                 Toast.makeText(getApplicationContext(),"reset", Toast.LENGTH_SHORT).show();
 
 
@@ -139,6 +177,7 @@ public class CancionTusa extends AppCompatActivity {
         mTextViewCountDown.setText(timeLeftFormatted);
 
         if (seconds==0){
+
             final AlertDialog.Builder builderss12 = new AlertDialog.Builder(CancionTusa.this);
             final LayoutInflater inflaters12 = getLayoutInflater();
             View viss12 = inflaters12.inflate(R.layout.felicitacion, null);
@@ -173,7 +212,7 @@ public class CancionTusa extends AppCompatActivity {
             startActivity(new Intent(getBaseContext(), MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
             finish();
-            mp.stop();
+            mp[numpista].stop();
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -187,7 +226,7 @@ public class CancionTusa extends AppCompatActivity {
             startActivity(new Intent(getBaseContext(), MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
             finish();
-            mp.stop();
+            mp[numpista].stop();
 
         }
 

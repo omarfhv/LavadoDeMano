@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,16 +13,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout botonselena, botonramito, botoncumbia,botonqueen, botonjuanga,botontusa,botonluismi,botonchona,botonrams;
     ColorDrawable dialogColor;
-
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                }
+            });
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+
 
 
         botonselena = findViewById(R.id.btnselena);
@@ -56,80 +76,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("save",0);
+        SharedPreferences.Editor editor = prefs.edit();
+
         switch (view.getId()) {
 
             case R.id.btntusa:
-
-                Intent intent11 = new Intent(this, CancionTusa.class);
-                startActivity(intent11);
-                finish();
+                editor.putInt("pista", 0);
+                editor.commit();
                 break;
 
 
             case R.id.btnramito:
-                Intent intent011 = new Intent(this, CancionRamito.class);
-                startActivity(intent011);
-                finish();
-
+                editor.putInt("pista", 1);
+                editor.commit();
                 break;
 
 
             case R.id.btnchona:
-                Intent intent111 = new Intent(this, CancionChona.class);
-                startActivity(intent111);
-                finish();
-
-
+                editor.putInt("pista", 2);
+                editor.commit();
                 break;
 
 
             case R.id.btncumbia:
-
-                Intent intent112 = new Intent(this, CancionCumbia.class);
-                startActivity(intent112);
-                finish();
+                editor.putInt("pista", 3);
+                editor.commit();
                 break;
 
 
             case R.id.botonjuanga:
-                Intent intent113 = new Intent(this, CancionJuanga.class);
-                startActivity(intent113);
-                finish();
-
+                editor.putInt("pista", 4);
+                editor.commit();
                 break;
 
 
             case R.id.btnluismi:
-
-                Intent intent115 = new Intent(this, CancionLuismi.class);
-                startActivity(intent115);
-                finish();
+                editor.putInt("pista", 5);
+                editor.commit();
                 break;
 
 
             case R.id.btnqueen:
-                Intent intent119 = new Intent(this, CancionQueen.class);
-                startActivity(intent119);
-                finish();
-
-                finish();
+                editor.putInt("pista", 6);
+                editor.commit();
                 break;
 
 
             case R.id.btnselena:
-                Intent intent116 = new Intent(this, CancionSelena.class);
-                startActivity(intent116);
-                finish();
-
+                editor.putInt("pista", 7);
+                editor.commit();
                 break;
 
             case R.id.btnqramst:
-                Intent intent117 = new Intent(this, CancionDaHast.class);
-                startActivity(intent117);
-                finish();
-
+                editor.putInt("pista", 8);
+                editor.commit();
                 break;
         }
+        Intent intent = new Intent(this, CancionTusa.class);
+        startActivity(intent);
+        finish();
 
     }
 

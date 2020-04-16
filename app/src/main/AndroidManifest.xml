@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.heisenbergtao.lavadodemano">
 
     <application
@@ -8,17 +9,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/lavas"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".CancionDaHast"></activity>
-        <activity android:name=".CancionRamito" />
-        <activity android:name=".CancionQueen" />
-        <activity android:name=".CancionLuismi" />
-        <activity android:name=".CancionJuanga" />
-        <activity android:name=".CancionCumbia" />
-        <activity android:name=".CancionChona" />
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".CancionTusa" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CancionSelena" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9129010539844350~1739909464"/>
     </application>
 
 </manifest>
