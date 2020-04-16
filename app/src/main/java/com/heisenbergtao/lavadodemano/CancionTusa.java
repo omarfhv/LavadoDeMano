@@ -2,11 +2,14 @@ package com.heisenbergtao.lavadodemano;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +27,7 @@ public class CancionTusa extends AppCompatActivity {
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
-
+    ColorDrawable dialogColor;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private GifImageView gifImageView;
@@ -91,6 +94,7 @@ public class CancionTusa extends AppCompatActivity {
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
 
+
             }
 
             @Override
@@ -133,7 +137,36 @@ public class CancionTusa extends AppCompatActivity {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
         mTextViewCountDown.setText(timeLeftFormatted);
+
+        if (seconds==0){
+            final AlertDialog.Builder builderss12 = new AlertDialog.Builder(CancionTusa.this);
+            final LayoutInflater inflaters12 = getLayoutInflater();
+            View viss12 = inflaters12.inflate(R.layout.felicitacion, null);
+            builderss12.setView(viss12);
+            final AlertDialog dialogos12 = builderss12.create();
+            dialogos12.setCancelable(true);
+            dialogos12.getWindow().setBackgroundDrawable(dialogColor);
+            Button botonokos12 = viss12.findViewById(R.id.botoncont);
+            botonokos12.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dialogos12.dismiss();
+
+                }
+            });
+
+
+            dialogos12.show();
+        }
+
+
+
+
+
     }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
