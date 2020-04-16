@@ -31,32 +31,25 @@ import pl.droidsonroids.gif.GifImageView;
 public class CancionTusa extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 40000;
 
-    MediaPlayer[] mp = new MediaPlayer[10];
+    MediaPlayer[] mp = new MediaPlayer[9];
+
+
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
     ColorDrawable dialogColor;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
-    private GifImageView gifImageView;
+    ImageView pasos;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     int numpista = 0;
     private AdView mAdView;
+    int imagenes[] = new int[]{R.drawable.c1, R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c66, R.drawable.c7, R.drawable.c8};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mp[0] = MediaPlayer.create(this, R.raw.tus);
-        mp[1] = MediaPlayer.create(this, R.raw.violetas);
-        mp[2] = MediaPlayer.create(this, R.raw.chona);
-        mp[3] = MediaPlayer.create(this, R.raw.jefes);
-        mp[4] = MediaPlayer.create(this, R.raw.noa);
-        mp[5] = MediaPlayer.create(this, R.raw.marchar);
-        mp[6] = MediaPlayer.create(this, R.raw.queen);
-        mp[7] = MediaPlayer.create(this, R.raw.carcacha);
-        mp[8] = MediaPlayer.create(this, R.raw.du);
 
 
         //botonatras
@@ -66,6 +59,11 @@ public class CancionTusa extends AppCompatActivity {
 
         }
         setContentView(R.layout.activity_cancion_selena);
+
+        mp = new MediaPlayer[]{MediaPlayer.create(this, R.raw.tus), MediaPlayer.create(this, R.raw.violetas),
+                MediaPlayer.create(this, R.raw.chona), MediaPlayer.create(this, R.raw.jefes), MediaPlayer.create(this, R.raw.noa),
+                MediaPlayer.create(this, R.raw.marchar), MediaPlayer.create(this, R.raw.queen), MediaPlayer.create(this, R.raw.carcacha),
+                MediaPlayer.create(this, R.raw.du)};
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -77,8 +75,7 @@ public class CancionTusa extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("save",0);
-        SharedPreferences.Editor editor = prefs.edit();
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("save", 0);
         numpista = prefs.getInt("pista", 0);
 
 
@@ -86,7 +83,7 @@ public class CancionTusa extends AppCompatActivity {
 
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
-        gifImageView = findViewById(R.id.Secuencias);
+        pasos = findViewById(R.id.secuencias);
 
 
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +99,6 @@ public class CancionTusa extends AppCompatActivity {
                     mp[numpista].start();
                     startTimer();
 
-                    Toast.makeText(getApplicationContext(),"inicio", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -115,7 +111,6 @@ public class CancionTusa extends AppCompatActivity {
                 resetTimer();
                 mp[numpista].stop();
                 mp[numpista].prepareAsync();
-                Toast.makeText(getApplicationContext(),"reset", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -138,7 +133,7 @@ public class CancionTusa extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-                mButtonStartPause.setText("INICIO");
+                mButtonStartPause.setText("Inicio");
                 mButtonStartPause.setVisibility(View.INVISIBLE);
                 mButtonReset.setVisibility(View.VISIBLE);
             }
@@ -146,7 +141,7 @@ public class CancionTusa extends AppCompatActivity {
 
 
         mTimerRunning = true;
-        mButtonStartPause.setText("PAUSE");
+        mButtonStartPause.setText("Pausa");
         mButtonReset.setVisibility(View.INVISIBLE);
     }
 
@@ -154,9 +149,8 @@ public class CancionTusa extends AppCompatActivity {
 
         mCountDownTimer.cancel();
         mTimerRunning = false;
-        mButtonStartPause.setText("INICIO");
+        mButtonStartPause.setText("Continuar");
         mButtonReset.setVisibility(View.VISIBLE);
-        Toast.makeText(getApplicationContext(),"Reiniciar", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -176,33 +170,50 @@ public class CancionTusa extends AppCompatActivity {
 
         mTextViewCountDown.setText(timeLeftFormatted);
 
-        if (seconds==0){
+        switch (seconds) {
+            case 40:
+                pasos.setImageResource(imagenes[0]);
+                break;
+            case 35:
+                pasos.setImageResource(imagenes[1]);
+                break;
+            case 30:
+                pasos.setImageResource(imagenes[2]);
+                break;
+            case 25:
+                pasos.setImageResource(imagenes[3]);
+                break;
+            case 20:
+                pasos.setImageResource(imagenes[4]);
+                break;
+            case 15:
+                pasos.setImageResource(imagenes[5]);
+                break;
 
-            final AlertDialog.Builder builderss12 = new AlertDialog.Builder(CancionTusa.this);
-            final LayoutInflater inflaters12 = getLayoutInflater();
-            View viss12 = inflaters12.inflate(R.layout.felicitacion, null);
-            builderss12.setView(viss12);
-            final AlertDialog dialogos12 = builderss12.create();
-            dialogos12.setCancelable(true);
-            dialogos12.getWindow().setBackgroundDrawable(dialogColor);
-            Button botonokos12 = viss12.findViewById(R.id.botoncont);
-            botonokos12.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    dialogos12.dismiss();
+            case 0:
+                final AlertDialog.Builder builder = new AlertDialog.Builder(CancionTusa.this);
+                final LayoutInflater inflaters = getLayoutInflater();
+                View vis = inflaters.inflate(R.layout.felicitacion, null);
+                builder.setView(vis);
+                final AlertDialog dialogo = builder.create();
+                dialogo.setCancelable(true);
+                dialogo.getWindow().setBackgroundDrawable(dialogColor);
+                Button botonokos12 = vis.findViewById(R.id.botoncont);
+                botonokos12.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                }
-            });
+                        dialogo.dismiss();
+
+                    }
+                });
 
 
-            dialogos12.show();
+                dialogo.show();
+                break;
+
         }
-
-
-
-
-
     }
 
 

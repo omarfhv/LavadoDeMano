@@ -14,7 +14,7 @@
         android:gravity="center"
         android:textColor="#03A9F4"
         android:id="@+id/txttitulo"
-        ></TextView>
+        />
 
     <TextView
         android:id="@+id/text_view_countdown"
@@ -29,23 +29,21 @@
 
 
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/Secuencias"
+    <ImageView
+        android:id="@+id/secuencias"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/lavado"
+        android:src="@drawable/c1"
         android:layout_below="@+id/text_view_countdown"
+        />
 
-        >
-
-    </pl.droidsonroids.gif.GifImageView>
 
     <Button
         android:id="@+id/button_start_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Secuencias"
+        android:layout_below="@+id/secuencias"
         android:background="@drawable/boton_principal"
         android:textColor="#ffff"
         android:layout_marginVertical="10dp"
@@ -56,14 +54,15 @@
         android:id="@+id/button_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Secuencias"
-        android:background="@drawable/boton_principal"
-        android:textColor="#ffff"
-        android:layout_marginStart="11dp"
-        android:layout_toEndOf="@+id/button_start_pause"
-        android:text="REINICIAR"
-        android:layout_marginVertical="10dp"
+        android:layout_below="@+id/secuencias"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/button_start_pause"
+        android:background="@drawable/boton_principal"
+        android:text="REINICIAR"
+        android:textColor="#ffff"
         android:visibility="invisible"
         tools:visibility="visible" />
 
