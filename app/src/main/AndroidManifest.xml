@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CancionRamito"></activity>
+        <activity android:name=".CancionDaHast"></activity>
+        <activity android:name=".CancionRamito" />
         <activity android:name=".CancionQueen" />
         <activity android:name=".CancionLuismi" />
         <activity android:name=".CancionJuanga" />
