@@ -44,7 +44,7 @@ public class CancionTusa extends AppCompatActivity {
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     int numpista = 0;
     private AdView mAdView;
-    int imagenes[] = new int[]{R.drawable.c1, R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c66, R.drawable.c7, R.drawable.c8};
+    int imagenes[] = new int[]{ R.drawable.m1, R.drawable.m2, R.drawable.m3, R.drawable.m4, R.drawable.m5, R.drawable.m6, R.drawable.m7, R.drawable.m8, R.drawable.m9, R.drawable.m10, R.drawable.m11};
 
 
     @Override
