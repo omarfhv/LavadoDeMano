@@ -174,20 +174,35 @@ public class CancionTusa extends AppCompatActivity {
             case 40:
                 pasos.setImageResource(imagenes[0]);
                 break;
-            case 35:
+            case 38:
                 pasos.setImageResource(imagenes[1]);
                 break;
-            case 30:
+            case 35:
                 pasos.setImageResource(imagenes[2]);
                 break;
-            case 25:
+            case 32:
                 pasos.setImageResource(imagenes[3]);
                 break;
-            case 20:
+            case 26:
                 pasos.setImageResource(imagenes[4]);
                 break;
-            case 15:
+            case 23:
                 pasos.setImageResource(imagenes[5]);
+                break;
+            case 19:
+                pasos.setImageResource(imagenes[6]);
+                break;
+            case 13:
+                pasos.setImageResource(imagenes[7]);
+                break;
+            case 7:
+                pasos.setImageResource(imagenes[8]);
+                break;
+            case 4:
+                pasos.setImageResource(imagenes[9]);
+                break;
+            case 2:
+                pasos.setImageResource(imagenes[10]);
                 break;
 
 
