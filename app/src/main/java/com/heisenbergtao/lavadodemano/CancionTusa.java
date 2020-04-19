@@ -34,6 +34,7 @@ public class CancionTusa extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 40000;
 
     MediaPlayer[] mp = new MediaPlayer[9];
+
     InterstitialAd mInterstitialAd;
 
 
@@ -219,6 +220,9 @@ public class CancionTusa extends AppCompatActivity {
                 final LayoutInflater inflaters = getLayoutInflater();
                 View vis = inflaters.inflate(R.layout.felicitacion, null);
                 builder.setView(vis);
+                final MediaPlayer negro;
+                negro =MediaPlayer.create(this, R.raw.negro);
+
                 final AlertDialog dialogo = builder.create();
                 dialogo.setCancelable(true);
                 dialogo.getWindow().setBackgroundDrawable(dialogColor);
@@ -228,6 +232,7 @@ public class CancionTusa extends AppCompatActivity {
                     public void onClick(View v) {
 
                         dialogo.dismiss();
+                        negro.stop();
                         mInterstitialAd.show();
 
 
@@ -236,7 +241,7 @@ public class CancionTusa extends AppCompatActivity {
                     }
                 });
 
-
+                negro.start();
                 dialogo.show();
                 break;
 
