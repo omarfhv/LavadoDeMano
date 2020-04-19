@@ -11,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MiFirebaseIntacedService"></activity>
+        <activity android:name=".MiFirebaseMessagingService" />
         <activity android:name=".CancionTusa" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Splash">
@@ -23,7 +25,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9129010539844350~1739909464"/>
+            android:value="ca-app-pub-9129010539844350~1739909464" />
     </application>
 
 </manifest>

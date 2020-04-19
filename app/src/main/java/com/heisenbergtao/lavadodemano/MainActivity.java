@@ -13,9 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout botonselena, botonramito, botoncumbia,botonqueen, botonjuanga,botontusa,botonluismi,botonchona,botonrams;
     ColorDrawable dialogColor;
     private AdView mAdView;
+    InterstitialAd mInterstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
 
-
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-9129010539844350/9620578226");
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequest1);
+        mInterstitialAd.setAdListener(new AdListener());
 
         botonselena = findViewById(R.id.btnselena);
         botonselena.setOnClickListener(this);

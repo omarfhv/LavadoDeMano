@@ -18,8 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -32,6 +34,7 @@ public class CancionTusa extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 40000;
 
     MediaPlayer[] mp = new MediaPlayer[9];
+    InterstitialAd mInterstitialAd;
 
 
     private TextView mTextViewCountDown;
@@ -74,6 +77,11 @@ public class CancionTusa extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-9129010539844350/9620578226");
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequest1);
+        mInterstitialAd.setAdListener(new AdListener());
 
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("save", 0);
         numpista = prefs.getInt("pista", 0);
@@ -220,6 +228,10 @@ public class CancionTusa extends AppCompatActivity {
                     public void onClick(View v) {
 
                         dialogo.dismiss();
+                        mInterstitialAd.show();
+
+
+
 
                     }
                 });

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "799623925129",
+    "firebase_url": "https://lavadodemanos-51f8c.firebaseio.com",
+    "project_id": "lavadodemanos-51f8c",
+    "storage_bucket": "lavadodemanos-51f8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799623925129:android:eb2c1ca29af9e1b80d6558",
+        "android_client_info": {
+          "package_name": "com.heisenbergtao.lavadodemano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799623925129-82ccgbq24cg2cq2nsf36rfdsdmbplpe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-2QdEe6vmaB2AvZLVg0fmMINvj5nfHSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799623925129-82ccgbq24cg2cq2nsf36rfdsdmbplpe1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
